@@ -9,6 +9,11 @@ public class WelcomeUssdMenu implements UssdMenu{
 	
 	Map<String, String> context = new HashMap<String, String>();	
 
+	public WelcomeUssdMenu(Map<String, String> context) {
+		super();
+		this.context = context;
+	}
+
 	public String getContent() {		
 		return "Welcome to the blood donor application. \n1. Continue  \n2. About Us";
 	}
