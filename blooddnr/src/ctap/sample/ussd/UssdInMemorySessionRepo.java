@@ -7,8 +7,8 @@ public class UssdInMemorySessionRepo implements UssdSessionRepo{
 
 	private static final Map<String, UssdMenu> sessions = new ConcurrentHashMap<String,  UssdMenu>();
 	
-	public UssdMenu getMenu(String mobileNumber) {		
-		return sessions.get(mobileNumber);
+	public UssdMenu getMenu(String sessionId) {		
+		return sessions.get(sessionId);
 	}
 
 	public void addMenu(String sessionId, UssdMenu ussdMenu) {

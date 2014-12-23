@@ -28,15 +28,13 @@ public class UssdMoListner implements MoUssdListener{
         }
 	}
 
-	public void onReceivedUssd(MoUssdReq moUssdReq) {
-		
-		System.out.println("###########" + moUssdReq);
+	public void onReceivedUssd(MoUssdReq moUssdReq) {				
 		
 		UssdMenu ussdMenu = null;
 		if(moUssdReq.getUssdOperation().equals(OperationType.MO_INIT.getName())) {
 			ussdMenu = new WelcomeUssdMenu();	
 		} else {
-			UssdMenu curUssdMenu = ussdSessionRepo.getMenu(moUssdReq.getSessionId());
+			UssdMenu curUssdMenu = ussdSessionRepo.getMenu(moUssdReq.getSessionId());			
 			ussdMenu = curUssdMenu.nextMenu(moUssdReq.getMessage());
 		}
 		
