@@ -11,8 +11,9 @@ public class BloodGroupUssdMenu implements UssdMenu{
 	Map<String, String> inputBloodGroup = new HashMap<String, String>();
 	
 	
-	public BloodGroupUssdMenu() {
+	public BloodGroupUssdMenu(Map<String, String> context) {
 		super();
+		this.context = context;		
 		inputBloodGroup.put("1","A");
 		inputBloodGroup.put("2","B");
 		inputBloodGroup.put("3","AB");
@@ -26,7 +27,7 @@ public class BloodGroupUssdMenu implements UssdMenu{
 	public UssdMenu nextMenu(String input) {	
 		if(inputBloodGroup.keySet().contains(input)) {
 			context.put("group", inputBloodGroup.get(input));
-			return new RhesusFactorUssdMenu();
+			return new RhesusFactorUssdMenu(context);
 		} else {
 			return new InvalidInputUssdMenu();
 		}

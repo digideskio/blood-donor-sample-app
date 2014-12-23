@@ -2,6 +2,8 @@ package ctap.sample.ussd;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import hms.kite.samples.api.SdpException;
 import hms.kite.samples.api.ussd.MoUssdListener;
@@ -30,9 +32,12 @@ public class UssdMoListner implements MoUssdListener{
 
 	public void onReceivedUssd(MoUssdReq moUssdReq) {				
 		
-		UssdMenu ussdMenu = null;
+		UssdMenu ussdMenu = null;		
+		
 		if(moUssdReq.getUssdOperation().equals(OperationType.MO_INIT.getName())) {
-			ussdMenu = new WelcomeUssdMenu();	
+			Map<String, String> context = new HashMap<String, String>();
+			context.put("msisdn",moUssdReq.getSourceAddress());
+			ussdMenu = new WelcomeUssdMenu(context);	
 		} else {
 			UssdMenu curUssdMenu = ussdSessionRepo.getMenu(moUssdReq.getSessionId());			
 			ussdMenu = curUssdMenu.nextMenu(moUssdReq.getMessage());
