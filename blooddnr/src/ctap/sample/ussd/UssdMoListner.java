@@ -35,6 +35,9 @@ public class UssdMoListner implements MoUssdListener{
 		UssdMenu ussdMenu = null;
 		if(moUssdReq.getUssdOperation().equals(OperationType.MO_INIT.getName())) {
 			ussdMenu = new WelcomeUssdMenu();	
+		} else {
+			UssdMenu curUssdMenu = ussdSessionRepo.getMenu(moUssdReq.getSessionId());
+			ussdMenu = curUssdMenu.nextMenu(moUssdReq.getMessage());
 		}
 		
 		ussdSessionRepo.addMenu(moUssdReq.getSessionId(),  ussdMenu);
